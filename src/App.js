@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, View, TextInput, StyleSheet, Text, Image, Dimensions} from 'react-native';
+import React from 'react';
 import LogInContainer from "./screens/logIn/LogInContainer";
+import FeedContainer from "./screens/feed/FeedContainer";
 
 
 const App = () => {
 
-    return <LogInContainer/>;
+    return <FeedContainer/>;
 };
 
 export default App;
