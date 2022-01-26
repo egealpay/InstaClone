@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
-import {ScrollView} from 'react-native';
-import SafeAreaView from "react-native/Libraries/Components/SafeAreaView/SafeAreaView";
+import {ScrollView, View} from 'react-native';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import Post from "./components/Post";
 
 const FeedView = props => {
+    const insets = useSafeAreaInsets();
 
     function renderPosts() {
         return props.posts.map((post, index) => {
@@ -11,11 +12,15 @@ const FeedView = props => {
         });
     }
 
-    return <SafeAreaView style={{flex: 1}}>
+    return <View style={{
+        flex: 1,
+        paddingTop: insets.top / 4,
+        paddingBottom: insets.bottom
+    }}>
         <ScrollView>
             {renderPosts()}
         </ScrollView>
-    </SafeAreaView>
+    </View>
 }
 
 export default FeedView;

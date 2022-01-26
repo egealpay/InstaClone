@@ -1,4 +1,4 @@
-import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert} from "react-native";
 import React from "react";
 import {InstagramTextLogo} from "../../assets";
 
@@ -30,6 +30,11 @@ const LogInView = props => {
                 }}>Log In</Text>
             </View>
         </TouchableOpacity>
+        {props.displayErrorAlert && Alert.alert(
+            "Warning",
+            "Username or password cannot be empty!",
+            [{text: "OK", onPress: () => props.onDismissErrorAlert()}]
+        )}
     </View>
 }
 
