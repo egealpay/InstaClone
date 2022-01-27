@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import LogInContainer from "./screens/logIn/LogInContainer";
 import FeedContainer from "./screens/feed/FeedContainer";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context/src/SafeAreaContext";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import HeaderLeftButton from "./screens/logIn/components/HeaderLeftButton";
 
 export const AuthContext = React.createContext();
 const Stack = createNativeStackNavigator();
@@ -15,7 +17,17 @@ const App = () => {
                 case 'LOG_IN':
                     return {
                         ...prevState,
-                        isLoggedIn: true,
+                        isLoggedIn: true
+                    };
+                case 'RESTORE_TOKEN':
+                    return {
+                        ...prevState,
+                        isLoggedIn: true
+                    };
+                case 'LOG_OUT':
+                    return {
+                        ...prevState,
+                        isLoggedIn: false
                     };
             }
         },
@@ -24,28 +36,46 @@ const App = () => {
         }
     );
 
+    useEffect(() => {
+        AsyncStorage.getItem('isLoggedIn')
+            .then((value) => {
+                value != null ? JSON.parse(value) : null;
+
+                if (value) {
+                    dispatch({type: 'RESTORE_TOKEN'});
+                }
+            })
+    }, []);
+
     const authContext = React.useMemo(
         () => ({
             logIn: async data => {
-                // In a production app, we need to send some data (usually username, password) to server and get a token
-                // We will also need to handle errors if sign in failed
-                // After getting token, we need to persist the token using `SecureStore`
-                // In the example, we'll use a dummy token
-
-                dispatch({type: 'LOG_IN'});
+                AsyncStorage.setItem('isLoggedIn', JSON.stringify(true))
+                    .then(() => dispatch({type: 'LOG_IN'}));
+            },
+            logOut: () => {
+                AsyncStorage.setItem('isLoggedIn', JSON.stringify(false))
+                    .then(() => dispatch({type: 'LOG_OUT'}));
             }
-        }),
-        []
-    );
+        }), []);
 
     return <SafeAreaProvider>
         <NavigationContainer>
             <AuthContext.Provider value={authContext}>
                 <Stack.Navigator>
                     {state.isLoggedIn ? (
-                        <Stack.Screen name="Feed" component={FeedContainer} options={{title: 'Instagram'}}/>
+                        <Stack.Screen
+                            name="Feed"
+                            component={FeedContainer}
+                            options={{
+                                title: 'Instagram',
+                                headerLeft: () => <HeaderLeftButton logOut={() => authContext.logOut()}/>
+                            }}/>
                     ) : (
-                        <Stack.Screen name="LogIn" component={LogInContainer} options={{headerShown: false}}/>
+                        <Stack.Screen
+                            name="LogIn"
+                            component={LogInContainer}
+                            options={{headerShown: false}}/>
                     )}
                 </Stack.Navigator>
             </AuthContext.Provider>

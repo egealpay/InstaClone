@@ -3,7 +3,7 @@ import React from "react";
 import {InstagramTextLogo} from "../../assets";
 
 const LogInView = props => {
-    return <View style={{flex: 1, justifyContent: 'center'}}>
+    return <View style={styles.viewContainer}>
         <Image
             style={styles.logo}
             resizeMode={"contain"}
@@ -39,6 +39,10 @@ const LogInView = props => {
 }
 
 const styles = StyleSheet.create({
+    viewContainer: {
+        flex: 1,
+        justifyContent: 'center'
+    },
     logo: {
         width: Dimensions.get('window').width,
         height: 140

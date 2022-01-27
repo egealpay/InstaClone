@@ -12,9 +12,6 @@ const LogInContainer = () => {
     const {logIn} = React.useContext(AuthContext);
 
     const logInButtonPressed = () => {
-        console.log("Username: ", username);
-        console.log("Password: ", password);
-
         if (username.length === 0 || password.length === 0) {
             setDisplayErrorAlert(true);
         } else {

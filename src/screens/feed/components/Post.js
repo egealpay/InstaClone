@@ -2,6 +2,7 @@ import {Dimensions, Image, StyleSheet, Text, View, FlatList} from "react-native"
 import Feather from "react-native-vector-icons/Feather";
 import React, {useState} from "react";
 import VideoContent from "./VideoContent";
+import Colors from "../../../styles/Colors";
 
 const Post = props => {
     const [index, setIndex] = useState(0);
@@ -25,7 +26,7 @@ const Post = props => {
         let temp = []
         for (let i = 0; i < contentLength; i++) {
             temp.push(<View
-                style={[styles.indicator, {backgroundColor: i === index ? '#5eabfc' : '#d0d0d0'}]}/>)
+                style={[styles.indicator, {backgroundColor: i === index ? Colors.INDICATOR_ACTIVE : Colors.INDICATOR_INACTIVE}]}/>)
         }
 
         return temp;
@@ -59,7 +60,7 @@ const Post = props => {
                     data={content}
                     renderItem={({item}) => item.type === 'image' ? renderImageContent(item.file) : renderVideoContent(item.file)}
                 />
-                <View style={{marginTop: 8, flexDirection: 'row', justifyContent: 'center'}}>
+                <View style={styles.indicatorContainer}>
                     {renderIndicators(content.length)}
                 </View>
             </View>
@@ -123,6 +124,11 @@ const styles = StyleSheet.create({
         width: 6,
         borderRadius: 3,
         marginHorizontal: 2
+    },
+    indicatorContainer: {
+        marginTop: 8,
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
 
