@@ -5,7 +5,7 @@ import VideoContent from "./VideoContent";
 import Colors from "../../../styles/Colors";
 
 const Post = props => {
-    const [index, setIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const renderAboveContent = () => {
         return <View style={styles.containerAboveContent}>
@@ -22,14 +22,18 @@ const Post = props => {
         </View>
     }
 
-    const renderIndicators = (contentLength) => {
-        let temp = []
-        for (let i = 0; i < contentLength; i++) {
-            temp.push(<View
-                style={[styles.indicator, {backgroundColor: i === index ? Colors.INDICATOR_ACTIVE : Colors.INDICATOR_INACTIVE}]}/>)
-        }
+    const onScroll = (event) => {
+        const totalWidth = event.nativeEvent.layoutMeasurement.width;
+        const xPos = event.nativeEvent.contentOffset.x;
+        const current = Math.floor(xPos / totalWidth)
+        setCurrentIndex(current);
+    }
 
-        return temp;
+    const renderIndicators = (contents) => {
+        return contents.map((content, index) => {
+            return <View
+                style={[styles.indicator, {backgroundColor: index === currentIndex ? Colors.INDICATOR_ACTIVE : Colors.INDICATOR_INACTIVE}]}/>
+        })
     }
 
     const renderImageContent = (imageSource) => {
@@ -45,10 +49,10 @@ const Post = props => {
     }
 
     const renderContent = () => {
-        const content = props.content
+        const contents = props.contents
 
-        if (content.length === 1) {
-            const singleContent = content[0]
+        if (contents.length === 1) {
+            const singleContent = contents[0]
             return singleContent.type === 'image' ? renderImageContent(singleContent.file) : renderVideoContent(singleContent.file);
         } else {
             return <View>
@@ -56,12 +60,13 @@ const Post = props => {
                     horizontal={true}
                     pagingEnabled={true}
                     bounces={false}
+                    onScroll={onScroll}
                     showsHorizontalScrollIndicator={false}
-                    data={content}
+                    data={contents}
                     renderItem={({item}) => item.type === 'image' ? renderImageContent(item.file) : renderVideoContent(item.file)}
                 />
                 <View style={styles.indicatorContainer}>
-                    {renderIndicators(content.length)}
+                    {renderIndicators(contents)}
                 </View>
             </View>
         }

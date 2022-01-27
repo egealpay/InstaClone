@@ -8,7 +8,7 @@ const FeedView = props => {
 
     function renderPosts() {
         return props.posts.map((post, index) => {
-            return <Post user={post.user} content={post.content} key={index}/>
+            return <Post user={post.user} contents={post.contents} key={index}/>
         });
     }
 
