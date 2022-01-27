@@ -1,4 +1,12 @@
-import {SampleImage10MB, SampleImage10MB2, SampleVideo1} from "../assets";
+import {
+    SampleImage10MB,
+    SampleImage10MB2,
+    SampleImage15MB,
+    SampleVideo1,
+    SampleVideo2,
+    SampleVideo3,
+    SampleVideo4
+} from "../assets";
 
 class RestService {
     static getFeed() {
@@ -21,6 +29,48 @@ class RestService {
                     profileImageUrl: 'https://images2.minutemediacdn.com/image/fetch/w_850,h_560,c_fill,g_auto,f_auto/https%3A%2F%2Ffansided.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2021%2F01%2F1212232039-850x560.jpeg'
                 },
                 contents: [{file: SampleVideo1, type: 'video'}]
+            }]);
+        });
+    }
+
+    static getExplore() {
+        return new Promise((resolve, reject) => {
+            resolve([{
+                username: 'Allen',
+                content: {file: SampleImage10MB, type: 'image'}
+            }, {
+                username: 'Ja',
+                content: {file: SampleImage10MB2, type: 'image'}
+            }, {
+                username: 'Anthony',
+                content: {file: SampleVideo1, type: 'video'}
+            }, {
+                username: 'Tim',
+                content: {file: SampleImage15MB, type: 'image'}
+            }, {
+                username: 'LeBron',
+                content: {file: SampleVideo2, type: 'video'}
+            }, {
+                username: 'Bill',
+                content: {file: SampleImage10MB, type: 'image'}
+            }, {
+                username: 'Steve',
+                content: {file: SampleVideo3, type: 'video'}
+            }, {
+                username: 'Isabella',
+                content: {file: SampleImage10MB2, type: 'image'}
+            }, {
+                username: 'Bella',
+                content: {file: SampleImage15MB, type: 'image'}
+            }, {
+                username: 'Ray',
+                content: {file: SampleImage10MB, type: 'image'}
+            },  {
+                username: 'Kendall',
+                content: {file: SampleImage10MB2, type: 'image'}
+            }, {
+                username: 'Kyle',
+                content: {file: SampleVideo4, type: 'video'}
             }]);
         });
     }

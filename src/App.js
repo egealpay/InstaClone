@@ -5,7 +5,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context/src/SafeAreaContext";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import HeaderLeftButton from "./screens/logIn/components/HeaderLeftButton";
+import HeaderLeftButton from "./screens/feed/components/HeaderLeftButton";
+import HeaderRightButton from "./screens/feed/components/HeaderRightButton";
+import ExploreContainer from "./screens/explore/ExploreContainer";
 
 export const AuthContext = React.createContext();
 const Stack = createNativeStackNavigator();
@@ -64,13 +66,22 @@ const App = () => {
             <AuthContext.Provider value={authContext}>
                 <Stack.Navigator>
                     {state.isLoggedIn ? (
-                        <Stack.Screen
-                            name="Feed"
-                            component={FeedContainer}
-                            options={{
-                                title: 'Instagram',
-                                headerLeft: () => <HeaderLeftButton logOut={() => authContext.logOut()}/>
-                            }}/>
+                        <>
+                            <Stack.Screen
+                                name="Feed"
+                                component={FeedContainer}
+                                options={{
+                                    title: 'Instagram',
+                                    headerLeft: () => <HeaderLeftButton/>,
+                                    headerRight: () => <HeaderRightButton/>
+                                }}/>
+                            <Stack.Screen
+                                name="Explore"
+                                component={ExploreContainer}
+                                options={{
+                                    title: 'Explore',
+                                }}/>
+                        </>
                     ) : (
                         <Stack.Screen
                             name="LogIn"

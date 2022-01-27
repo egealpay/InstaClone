@@ -32,6 +32,7 @@ const Post = props => {
     const renderIndicators = (contents) => {
         return contents.map((content, index) => {
             return <View
+                key={index}
                 style={[styles.indicator, {backgroundColor: index === currentIndex ? Colors.INDICATOR_ACTIVE : Colors.INDICATOR_INACTIVE}]}/>
         })
     }
@@ -61,6 +62,7 @@ const Post = props => {
                     pagingEnabled={true}
                     bounces={false}
                     onScroll={onScroll}
+                    keyExtractor={(item, index) => index}
                     showsHorizontalScrollIndicator={false}
                     data={contents}
                     renderItem={({item}) => item.type === 'image' ? renderImageContent(item.file) : renderVideoContent(item.file)}
