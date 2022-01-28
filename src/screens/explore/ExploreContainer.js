@@ -6,13 +6,31 @@ const ExploreContainer = props => {
     const [thumbnails, setThumbnails] = useState([]);
 
     useEffect(() => {
+        getExplore();
+    }, []);
+
+    function getExplore() {
         RestService.getExplore()
             .then((result) => {
                 setThumbnails(result);
             })
-    }, [])
+    }
 
-    return <ExploreView thumbnails={thumbnails}/>
+    function onSearchTextInput(toSearch) {
+        if (toSearch.length === 0) {
+            getExplore();
+        } else {
+            RestService.getExploreBy(toSearch)
+                .then((result) => {
+                    setThumbnails(result);
+                })
+        }
+    }
+
+    return <ExploreView
+        thumbnails={thumbnails}
+        onSearchTextInput={(toSearch) => onSearchTextInput(toSearch)}
+    />
 }
 
 export default ExploreContainer;

@@ -1,7 +1,8 @@
 import React from "react";
-import {ScrollView, View} from "react-native";
+import {Dimensions, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import Thumbnail from "./components/Thumbnail";
+import SearchBar from "./components/SearchBar";
 
 const ExploreView = props => {
     const insets = useSafeAreaInsets();
@@ -38,6 +39,7 @@ const ExploreView = props => {
         paddingRight: insets.right
     }}>
         <ScrollView>
+            <SearchBar onSearchTextInput={(toSearch) => props.onSearchTextInput(toSearch)}/>
             {renderThumbnails()}
         </ScrollView>
     </View>
