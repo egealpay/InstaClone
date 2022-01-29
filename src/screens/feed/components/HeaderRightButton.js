@@ -3,6 +3,7 @@ import React from "react";
 import {TouchableOpacity} from "react-native";
 import {useNavigation} from '@react-navigation/native';
 
+// When user clicks this button, it will navigate the user to explore page.
 const HeaderRightButton = () => {
     const navigation = useNavigation();
 

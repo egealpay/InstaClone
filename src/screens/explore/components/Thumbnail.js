@@ -1,18 +1,20 @@
-import React, {useEffect} from "react";
-import {Dimensions, Image, View} from "react-native";
+import React from "react";
+import {Image, View} from "react-native";
 import Video from "react-native-video";
+import Constants from "../../../styles/Constants";
 
+// This component represents each post in explore screen.
 const Thumbnail = props => {
 
     return <View style={{
         margin: 2,
         height: 150,
-        width: Dimensions.get('window').width / 3
+        width: Constants.FULL_WIDTH / 3
     }}>
         {props.thumbnail.content.type === 'image' ? <Image
             style={{
                 height: 150,
-                width: Dimensions.get('window').width / 3
+                width: Constants.FULL_WIDTH / 3
             }}
             resizeMode={"cover"}
             source={props.thumbnail.content.file}

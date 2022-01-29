@@ -11,6 +11,8 @@ const LogInContainer = () => {
 
     const {logIn} = React.useContext(AuthContext);
 
+    // When user click the log in button, we will check the inputs first.
+    // If they are empty, an alert will be displayed. Else, user will successfully log in.
     const logInButtonPressed = () => {
         if (username.length === 0 || password.length === 0) {
             setDisplayErrorAlert(true);

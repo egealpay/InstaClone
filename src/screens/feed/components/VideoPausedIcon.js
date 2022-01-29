@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// When the video is paused, an icon will be displayed on top of the video
 const VideoPausedIcon = ({playVideo}) => {
     return <View style={styles.pausedIconContainer}>
         <TouchableWithoutFeedback onPress={() => playVideo()}>

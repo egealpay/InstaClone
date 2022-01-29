@@ -8,6 +8,7 @@ import {
     SampleVideo4
 } from "../assets";
 
+// Since we do not have a REST API for the app, this file will act like one.
 class RestService {
     static exploreContent = [{
         username: 'Allen',
@@ -44,6 +45,42 @@ class RestService {
         content: {file: SampleImage10MB2, type: 'image'}
     }, {
         username: 'Kyle',
+        content: {file: SampleVideo4, type: 'video'}
+    }, {
+        username: 'Bean',
+        content: {file: SampleImage10MB, type: 'image'}
+    }, {
+        username: 'Ja',
+        content: {file: SampleImage10MB2, type: 'image'}
+    }, {
+        username: 'Nick',
+        content: {file: SampleVideo1, type: 'video'}
+    }, {
+        username: 'Nichole',
+        content: {file: SampleImage15MB, type: 'image'}
+    }, {
+        username: 'LeBron',
+        content: {file: SampleVideo2, type: 'video'}
+    }, {
+        username: 'Morgan',
+        content: {file: SampleImage10MB, type: 'image'}
+    }, {
+        username: 'Mark',
+        content: {file: SampleVideo3, type: 'video'}
+    }, {
+        username: 'Isabella',
+        content: {file: SampleImage10MB2, type: 'image'}
+    }, {
+        username: 'Mike',
+        content: {file: SampleImage15MB, type: 'image'}
+    }, {
+        username: 'Greyson',
+        content: {file: SampleImage10MB, type: 'image'}
+    }, {
+        username: 'Jordan',
+        content: {file: SampleImage10MB2, type: 'image'}
+    }, {
+        username: 'Jamal',
         content: {file: SampleVideo4, type: 'video'}
     }];
 

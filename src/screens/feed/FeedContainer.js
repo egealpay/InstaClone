@@ -5,6 +5,7 @@ import RestService from "../../services/RestService";
 const FeedContainer = () => {
     const [posts, setPosts] = useState([]);
 
+    // When this page is rendered, get feed content.
     useEffect(() => {
         RestService.getFeed()
             .then((result) => {

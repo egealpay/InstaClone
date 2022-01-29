@@ -2,7 +2,7 @@ import {Dimensions, Image, StyleSheet, Text, View, FlatList} from "react-native"
 import Feather from "react-native-vector-icons/Feather";
 import React, {useState} from "react";
 import VideoContent from "./VideoContent";
-import Colors from "../../../styles/Colors";
+import Constants from "../../../styles/Constants";
 
 const Post = props => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,6 +22,7 @@ const Post = props => {
         </View>
     }
 
+    // When user scrolls within a multiple image post, update the idicator
     const onScroll = (event) => {
         const totalWidth = event.nativeEvent.layoutMeasurement.width;
         const xPos = event.nativeEvent.contentOffset.x;
@@ -29,11 +30,12 @@ const Post = props => {
         setCurrentIndex(current);
     }
 
+    // These indicators will show the current index for the image, displayed on screen
     const renderIndicators = (contents) => {
         return contents.map((content, index) => {
             return <View
                 key={index}
-                style={[styles.indicator, {backgroundColor: index === currentIndex ? Colors.INDICATOR_ACTIVE : Colors.INDICATOR_INACTIVE}]}/>
+                style={[styles.indicator, {backgroundColor: index === currentIndex ? Constants.INDICATOR_ACTIVE : Constants.INDICATOR_INACTIVE}]}/>
         })
     }
 
@@ -52,6 +54,7 @@ const Post = props => {
     const renderContent = () => {
         const contents = props.contents
 
+        // If post contains single video or image, we do not need a flat list
         if (contents.length === 1) {
             const singleContent = contents[0]
             return singleContent.type === 'image' ? renderImageContent(singleContent.file) : renderVideoContent(singleContent.file);
@@ -74,6 +77,7 @@ const Post = props => {
         }
     }
 
+    // Like, comment buttons
     const renderBelowContent = () => {
         return <View style={styles.containerBelowContent}>
             <Feather name={"heart"}
@@ -111,7 +115,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     content: {
-        width: Dimensions.get('window').width,
+        width: Constants.FULL_WIDTH,
         height: 450,
         marginVertical: 8
     },

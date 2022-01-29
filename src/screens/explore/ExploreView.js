@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 const ExploreView = props => {
     const insets = useSafeAreaInsets();
 
+    // To render contents as a Grid
     function renderThumbnails() {
         let thumbnails = props.thumbnails.map((thumbnail, index) => <Thumbnail thumbnail={thumbnail} key={index}/>);
 

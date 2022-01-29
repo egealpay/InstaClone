@@ -1,6 +1,7 @@
-import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert} from "react-native";
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert} from "react-native";
 import React from "react";
 import {InstagramTextLogo} from "../../assets";
+import Constants from "../../styles/Constants";
 
 const LogInView = props => {
     return <View style={styles.viewContainer}>
@@ -25,7 +26,7 @@ const LogInView = props => {
         <TouchableOpacity onPress={props.onLogInPressed}>
             <View style={styles.logInButton}>
                 <Text style={{
-                    color: '#FFF',
+                    color: Constants.WHITE,
                     fontSize: 16
                 }}>Log In</Text>
             </View>
@@ -44,16 +45,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: Dimensions.get('window').width,
+        width: Constants.FULL_WIDTH,
         height: 140
     },
     input: {
         height: 50,
         borderWidth: 1,
         borderRadius: 8,
-        borderColor: '#dedede',
+        borderColor: Constants.GREY,
         padding: 10,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: Constants.DIRTY_WHITE,
         marginHorizontal: 32
     },
     logInButton: {
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#7abbff'
+        backgroundColor: Constants.BLUE
     }
 });
 

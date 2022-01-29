@@ -1,6 +1,7 @@
 import {StyleSheet, TextInput} from "react-native";
 import React, {useState} from "react";
 
+// When user type anything in search bar, it will be used to filter contents in explore page.
 const SearchBar = props => {
     const [searchInput, setSearchInput] = useState();
 
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#F5F5F5',
         marginHorizontal: 16,
-        marginBottom: 8
+        marginBottom: 8,
+        marginTop: 4
     }
 });
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import LogInContainer from "./screens/logIn/LogInContainer";
 import FeedContainer from "./screens/feed/FeedContainer";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -38,6 +38,9 @@ const App = () => {
         }
     );
 
+    // When user opens the app, check if the user logged in before.
+    // Logged In information is stored by using AsyncStorage.
+    // If the user was logged in, navigate him/her directly to feed page. Else, show log in page.
     useEffect(() => {
         AsyncStorage.getItem('isLoggedIn')
             .then((value) => {
@@ -49,6 +52,7 @@ const App = () => {
             })
     }, []);
 
+    // If user log in or log out, update logged in information in AsyncStorage
     const authContext = React.useMemo(
         () => ({
             logIn: async data => {
@@ -60,6 +64,7 @@ const App = () => {
                     .then(() => dispatch({type: 'LOG_OUT'}));
             }
         }), []);
+
 
     return <SafeAreaProvider>
         <NavigationContainer>
